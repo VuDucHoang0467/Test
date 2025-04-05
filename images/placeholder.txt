@@ -1,0 +1,41 @@
+This folder should contain the following images:
+
+1. hero.jpg - Hero image for the homepage
+2. Product images:
+   - products/smartphone1.jpg
+   - products/smartphone2.jpg
+   - products/smartphone3.jpg
+   - products/laptop1.jpg
+   - products/laptop2.jpg
+   - products/headphones1.jpg
+   - products/headphones2.jpg
+   - products/tshirt1.jpg
+   - products/tshirt2.jpg
+   - products/jeans1.jpg
+   - products/jeans2.jpg
+   - products/shoes1.jpg
+   - products/shoes2.jpg
+   - products/coffeemaker1.jpg
+   - products/coffeemaker2.jpg
+   - products/blender1.jpg
+   - products/blender2.jpg
+   - products/bedsheets1.jpg
+   - products/bedsheets2.jpg
+   - products/smartwatch1.jpg
+   - products/smartwatch2.jpg
+   - products/speaker1.jpg
+   - products/speaker2.jpg
+   - products/jacket1.jpg
+   - products/jacket2.jpg
+3. Category images:
+   - category1.jpg (Electronics)
+   - category2.jpg (Clothing)
+   - category3.jpg (Home & Kitchen)
+
+For testing purposes, you can use placeholder images from:
+- https://placeholder.com/
+- https://picsum.photos/
+- https://unsplash.com/
+
+Example usage:
+<img src="https://picsum.photos/300/200" alt="Placeholder">
