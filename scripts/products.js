@@ -183,6 +183,43 @@ function filterProducts(categories, maxPrice) {
     return filtered;
 }
 
+// Function to sort products
+function sortProducts(productsList, sortBy) {
+    const sortedProducts = [...productsList]; // Create a copy to avoid modifying the original array
+    
+    switch (sortBy) {
+        case 'price-low-high':
+            sortedProducts.sort((a, b) => a.price - b.price);
+            break;
+        case 'price-high-low':
+            sortedProducts.sort((a, b) => b.price - a.price);
+            break;
+        case 'name-a-z':
+            sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
+            break;
+        case 'name-z-a':
+            sortedProducts.sort((a, b) => b.name.localeCompare(a.name));
+            break;
+        default:
+            // Default sorting (by ID)
+            sortedProducts.sort((a, b) => a.id - b.id);
+            break;
+    }
+    
+    return sortedProducts;
+}
+
+// Function to filter and sort products
+function filterAndSortProducts(categories, maxPrice, sortBy) {
+    let result = filterProducts(categories, maxPrice);
+    
+    if (sortBy && sortBy !== 'default') {
+        result = sortProducts(result, sortBy);
+    }
+    
+    return result;
+}
+
 // Function to get related products (same category, excluding the current product)
 function getRelatedProducts(currentProductId) {
     const currentProduct = getProductById(currentProductId);

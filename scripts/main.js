@@ -155,35 +155,52 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize products on the products page
     if (document.getElementById('products-grid') && window.location.pathname.includes('products.html')) {
         const urlCategory = getParameterByName('category');
+        let currentSortBy = 'default';
+        let currentCategories = [];
+        let currentMaxPrice = 500; // Default value of the price slider
+        
+        // Function to apply filters and sorting
+        function applyFiltersAndSort() {
+            const filteredAndSortedProducts = filterAndSortProducts(
+                currentCategories.length > 0 ? currentCategories : null,
+                currentMaxPrice,
+                currentSortBy
+            );
+            
+            displayProducts(filteredAndSortedProducts, 'products-grid');
+        }
         
         if (urlCategory) {
             // Pre-check the category checkbox if one is specified in URL
             const categoryCheckbox = document.querySelector(`input[name="category"][value="${urlCategory}"]`);
             if (categoryCheckbox) {
                 categoryCheckbox.checked = true;
+                currentCategories = [urlCategory];
             }
-            
-            const filteredProducts = filterProductsByCategory(urlCategory);
-            displayProducts(filteredProducts, 'products-grid');
-        } else {
-            displayProducts(products, 'products-grid');
+        }
+        
+        // Initial display of products
+        applyFiltersAndSort();
+        
+        // Add event listener for the sorting dropdown
+        const sortBySelect = document.getElementById('sort-by');
+        if (sortBySelect) {
+            sortBySelect.addEventListener('change', function() {
+                currentSortBy = this.value;
+                applyFiltersAndSort();
+            });
         }
         
         // Add event listener for the "Apply Filters" button
         const applyFiltersButton = document.getElementById('apply-filters');
         applyFiltersButton.addEventListener('click', function() {
-            const checkedCategories = Array.from(
+            currentCategories = Array.from(
                 document.querySelectorAll('input[name="category"]:checked')
             ).map(checkbox => checkbox.value);
             
-            const maxPrice = parseInt(document.getElementById('price-range').value);
+            currentMaxPrice = parseInt(document.getElementById('price-range').value);
             
-            const filteredProducts = filterProducts(
-                checkedCategories.length > 0 ? checkedCategories : null,
-                maxPrice
-            );
-            
-            displayProducts(filteredProducts, 'products-grid');
+            applyFiltersAndSort();
         });
         
         // Update price display when slider changes
